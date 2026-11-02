@@ -1,0 +1,32 @@
+[project]
+name = "grafana-config-sync"
+version = "0.1.0"
+description = "Keep Grafana alerting in git: push rules + notification policy, pull a decrypted snapshot, wire up Git Sync for dashboards"
+requires-python = ">=3.12"
+dependencies = [
+    "pyyaml>=6.0.3",
+]
+
+[dependency-groups]
+dev = [
+    "pytest>=9.2.0",
+    "ruff>=0.17.3",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
+
+[tool.ruff]
+line-length = 120
+exclude = ["tests"]
+
+[tool.ruff.lint]
+select = ["E", "W", "F", "I", "B", "UP"]
+ignore = ["E402", "E501"]
+
+[tool.ruff.lint.isort]
+lines-between-types = 1
+
+[tool.ruff.format]
+quote-style = "preserve"

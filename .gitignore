@@ -1,0 +1,17 @@
+.env
+*.pem
+tmp/
+
+# generated snapshots of a live instance (may hold decrypted secrets) — keep them in a PRIVATE repo
+/alerting/
+/instance/
+/dashboards/
+
+# a backup that died before its trap fired
+.backup-staging.*
+
+__pycache__/
+*.pyc
+.venv/
+.ruff_cache/
+.pytest_cache/

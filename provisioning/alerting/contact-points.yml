@@ -1,0 +1,13 @@
+apiVersion: 1
+
+# DEV stack only. `push` never writes contact points: the url is a secure field that
+# every read endpoint returns as [REDACTED], so a write built from a read kills the
+# channel silently. Change production contact points in the UI, then `pull`.
+contactPoints:
+  - orgId: 1
+    name: critical-alerts
+    receivers:
+      - uid: critical-alerts-webhook
+        type: webhook
+        settings:
+          url: http://localhost:9999/alerts

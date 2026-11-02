@@ -1,0 +1,25 @@
+apiVersion: 1
+
+# The shape scripts/grafana_push_notification_policy.py converges a live tree towards.
+# Route ORDER is load-bearing: first-match-wins, `continue: false`, so the narrow
+# `service = proxmox` route must sit BEFORE the broad `severity = critical` one.
+policies:
+  - orgId: 1
+    receiver: critical-alerts
+    group_by: [alertname]
+    group_wait: 30s
+    group_interval: 5m
+    repeat_interval: 4h
+    routes:
+      - receiver: critical-alerts
+        matchers: [service = proxmox]
+        group_wait: 0s
+        group_interval: 5m
+        repeat_interval: 24h
+        continue: false
+      - receiver: critical-alerts
+        matchers: [severity = critical]
+        group_wait: 0s
+        group_interval: 30s
+        repeat_interval: 4h
+        continue: false
